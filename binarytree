@@ -1,0 +1,56 @@
+class node:
+    def __init__(self,data):
+        self.data=data
+        self.left=None
+        self.right=None
+class binarytree:
+    def __init__(self):
+        self.root=None
+    def insert(self,data):
+        new_node=node(data)
+        if self.root is None:
+            self.root=new_node
+            return
+        queue=[self.root]
+        while queue:
+            current=queue.pop(0)
+            if current.left is None:
+                current.left=new_node
+                return
+            else:
+                queue.append(current.left)
+            if current.right is None:
+                current.right=new_node
+                return
+            else:
+                queue.append(current.right)
+    def inorder(self,root):
+        if root is not None:
+            self.inorder(root.left)
+            print(root.data)
+            self.inorder(root.right)
+    def preorder(self,root):
+        if root is not None:
+            print(root.data)
+            self.preorder(root.left)
+            self.preorder(root.right)
+    def postorder(self,root):
+        if root is not None:
+            self.postorder(root.left)
+            self.postorder(root.right)
+            print(root.data)
+tree=binarytree()
+books=["data structure","computer networks","operating systems","python programming","database management","artificial intelligence"]
+for book in books:
+    tree.insert(book)
+print("1:inoder,2-preorder,3-postorder")
+c=int(input("enter ur choice"))
+if c==1:    
+    print("book titles in inorder traversal")
+    tree.inorder(tree.root)
+if c==2:
+    print("book titles in preorder traversal")
+    tree.preorder(tree.root)
+if c==3:
+    print("book titles in postorder traversal")
+    tree.postorder(tree.root)
